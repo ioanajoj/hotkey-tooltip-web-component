@@ -53,29 +53,29 @@
 <body>
   
   <button type="button" class="fill" id="button-a" onclick="alertACallback">Alert A</button>
-  <hotkey-tooltip targetSelector="#button-a" message="Alert A" hotkey="?"></hotkey-tooltip>
+  <hotkey-tooltip for="#button-a" message="Alert A" hotkey="?"></hotkey-tooltip>
 
   <button type="button" class="fill" id="button-b">Alert B</button>
-  <hotkey-tooltip targetSelector="#button-b" message="Alert B" hotkey="="></hotkey-tooltip>
+  <hotkey-tooltip for="#button-b" message="Alert B" hotkey="="></hotkey-tooltip>
   
   <button type="button" class="fill" id="button-c">Alert C</button>
-  <hotkey-tooltip targetSelector="#button-c" message="Alert C" hotkey="a"></hotkey-tooltip>
+  <hotkey-tooltip for="#button-c" message="Alert C" hotkey="a"></hotkey-tooltip>
 
   <script>
     // eslint-disable-next-line no-alert
     const alertACallback = () => { alert('Alert A'); }
     document.querySelector('#button-a').onclick = alertACallback;
-    document.querySelector('[targetselector="#button-a"]').callback = alertACallback;
+    document.querySelector('[for="#button-a"]').callback = alertACallback;
 
     // eslint-disable-next-line no-alert
     const alertBCallback = () => { alert('Alert B'); }
     document.querySelector('#button-b').onclick = alertBCallback;
-    document.querySelector('[targetselector="#button-b"]').callback = alertBCallback;
+    document.querySelector('[for="#button-b"]').callback = alertBCallback;
     
     // eslint-disable-next-line no-alert
     const alertCCallback = () => { alert('Alert C'); }
     document.querySelector('#button-c').onclick = alertCCallback;
-    document.querySelector('[targetselector="#button-c"]').callback = alertCCallback;
+    document.querySelector('[for="#button-c"]').callback = alertCCallback;
   </script>
 </body>
 </html>

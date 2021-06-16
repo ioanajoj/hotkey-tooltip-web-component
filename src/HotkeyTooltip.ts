@@ -28,7 +28,7 @@ export class HotkeyTooltip extends LitElement {
     }
   `;
 
-  @property({ type: String }) targetSelector = '';
+  @property({ type: String }) for = '';
 
   @property({ type: String }) message = '';
 
@@ -78,7 +78,7 @@ export class HotkeyTooltip extends LitElement {
   }
 
   setTarget() {
-    this.targetElement = document.querySelector(this.targetSelector);
+    this.targetElement = document.querySelector(this.for);
     this.targetElement?.addEventListener('mouseenter', this._show.bind(this));
     this.targetElement?.addEventListener('mouseleave', this._hide.bind(this));
   }
@@ -93,7 +93,7 @@ export class HotkeyTooltip extends LitElement {
   }
 
   _show() {
-    this.targetElement = document.querySelector(this.targetSelector);
+    this.targetElement = document.querySelector(this.for);
     let top = (
       (this.targetElement?.offsetTop || 0) +
       (this.targetElement?.offsetHeight || 0) +
