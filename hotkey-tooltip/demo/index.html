@@ -3,30 +3,79 @@
 <head>
   <meta charset="utf-8">
   <style>
+    html,
+    body {
+      margin: 0;
+      display: flex;
+      justify-content: center;
+      flex-direction: row;
+      align-items: center;
+      min-height: 100vh;
+      font-family: "Roboto Mono", monospace;
+    }
+
+    button {
+      margin: 20px;
+    }
+
+    .fill {
+      font-size: 20px;
+      font-weight: 200;
+      letter-spacing: 1px;
+      padding: 13px 50px 13px;
+      outline: 0;
+      border: 1px solid black;
+      cursor: pointer;
+      position: relative;
+      background-color: rgba(0, 0, 0, 0);
+    }
+
+    .fill::after {
+      content: "";
+      background-color: #ffe54c;
+      width: 100%;
+      z-index: -1;
+      position: absolute;
+      height: 100%;
+      top: 7px;
+      left: 7px;
+      transition: 0.2s;
+    }
+
+    .fill:hover::after {
+      top: 0px;
+      left: 0px;
+    }
   </style>
+  
+  <script type="module" src="../dist/hotkey-tooltip.js"></script>
 </head>
 <body>
-  <div id="demo"></div>
+  
+  <button type="button" class="fill" id="button-a" onclick="alertACallback">Alert A</button>
+  <hotkey-tooltip targetSelector="#button-a" message="Alert A" hotkey="?"></hotkey-tooltip>
 
-  <script type="module">
-    import { html, render } from 'lit-html';
-    import '../dist/hotkey-tooltip.js';
+  <button type="button" class="fill" id="button-b">Alert B</button>
+  <hotkey-tooltip targetSelector="#button-b" message="Alert B" hotkey="="></hotkey-tooltip>
+  
+  <button type="button" class="fill" id="button-c">Alert C</button>
+  <hotkey-tooltip targetSelector="#button-c" message="Alert C" hotkey="a"></hotkey-tooltip>
 
-    const targetSelector = '#button';
-    const title = 'Tooltip with hotkeys';
-    const hotkey = '+';
-    const callback = () => {console.log("hello");};
-    render(
-      html`
-        <button id="button">Click me!</button>
-        <hotkey-tooltip .targetSelector=${targetSelector} 
-          .message=${title} 
-          .hotkey=${hotkey} 
-          .callback=${callback}>
-        </hotkey-tooltip>
-      `,
-      document.querySelector('#demo')
-    );
+  <script>
+    // eslint-disable-next-line no-alert
+    const alertACallback = () => { alert('Alert A'); }
+    document.querySelector('#button-a').onclick = alertACallback;
+    document.querySelector('[targetselector="#button-a"]').callback = alertACallback;
+
+    // eslint-disable-next-line no-alert
+    const alertBCallback = () => { alert('Alert B'); }
+    document.querySelector('#button-b').onclick = alertBCallback;
+    document.querySelector('[targetselector="#button-b"]').callback = alertBCallback;
+    
+    // eslint-disable-next-line no-alert
+    const alertCCallback = () => { alert('Alert C'); }
+    document.querySelector('#button-c').onclick = alertCCallback;
+    document.querySelector('[targetselector="#button-c"]').callback = alertCCallback;
   </script>
 </body>
 </html>

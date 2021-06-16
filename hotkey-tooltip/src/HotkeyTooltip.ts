@@ -34,8 +34,6 @@ export class HotkeyTooltip extends LitElement {
 
   @property() hotkey: string = '';
 
-  @property({ type: String || null }) modifier = null;
-
   @property() callback: Function = () => {};
 
   @property() showTooltip: boolean = false;
@@ -63,6 +61,7 @@ export class HotkeyTooltip extends LitElement {
   }
 
   disconnectedCallback() {
+    super.disconnectedCallback();
     document.removeEventListener('keydown', this._checkPressedKey.bind(this));
     this.targetElement?.removeEventListener(
       'mouseenter',
@@ -95,9 +94,17 @@ export class HotkeyTooltip extends LitElement {
 
   _show() {
     this.targetElement = document.querySelector(this.targetSelector);
-    let top = ((this.targetElement?.clientTop || 0) + 40).toString();
+    let top = (
+      (this.targetElement?.offsetTop || 0) +
+      (this.targetElement?.offsetHeight || 0) +
+      10
+    ).toString();
     top += 'px';
-    let left = ((this.targetElement?.clientLeft || 0) - 20).toString();
+    let left = (
+      (this.targetElement?.offsetLeft || 0) +
+      0.5 * (this.targetElement?.offsetWidth || 0) -
+      42
+    ).toString();
     left += 'px';
     this.position = {
       top,
