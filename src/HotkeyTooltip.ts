@@ -26,6 +26,17 @@ export class HotkeyTooltip extends LitElement {
       transform: rotate(45deg);
       z-index: -1;
     }
+
+    .hotkey {
+      min-width: 10px;
+      padding: 0px 5px;
+      border: 1px solid #cdd8dd;
+      max-width: 40px;
+      max-height: 20px;
+      overflow: hidden;
+      font-style: normal;
+      font-weight: bold;
+    }
   `;
 
   @property({ type: String }) for = '';
